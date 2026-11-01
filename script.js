@@ -16,6 +16,7 @@ const APP_CONFIG = {
   messengerUrl: 'https://m.me/lahar.saree',
   deliveryInsideDhaka: 70,
   deliveryOutsideDhaka: 130,
+  adminPass: 'lahar2026',
   currency: '৳'
 };
 
@@ -1317,54 +1318,30 @@ ${itemsText}
     const container = document.getElementById('adminContainer');
     if (!container) return;
 
-    container.innerHTML = `
-      <div class="admin-login-box" style="max-width: 650px; text-align: left; padding: 36px;">
-        <div style="text-align: center; margin-bottom: 24px;">
-          <img src="assets/logos/final_logo-02.jpg__1_-removebg-preview.png" alt="লহর" class="admin-login-logo" style="margin-bottom:12px;">
-          <h2 style="font-size: 1.5rem; color: var(--color-noir); margin-bottom: 6px;">লহর সিস্টেম আর্কিটেকচার ও লাইভ স্ট্যাটাস</h2>
-          <span style="display:inline-block; background: #E8F5E9; color: #2E7D32; padding: 4px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;">
-            <i class="fa-solid fa-circle-check"></i> GitHub Pages লাইভ প্রোডাকশন সংস্করণ
-          </span>
+    if (!this.isAdminLoggedIn) {
+      container.innerHTML = `
+        <div class="admin-login-box">
+          <img src="assets/logos/final_logo-02.jpg__1_-removebg-preview.png" alt="লহর" class="admin-login-logo">
+          <h2>লহর অ্যাডমিন পোর্টাল</h2>
+          <p style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:20px;">ওয়েবসাইট পরিচালনা, প্রোডাক্ট ও রিভিউ মডারেশনের জন্য লগইন করুন</p>
+          
+          <form onsubmit="app.handleAdminLogin(event)">
+            <div class="form-group" style="text-align:left;">
+              <label for="adminPassInput">অ্যাডমিন পাসওয়ার্ড</label>
+              <input type="password" id="adminPassInput" placeholder="পাসওয়ার্ড প্রবেশ করান..." required>
+              <small style="color:var(--color-text-light); margin-top:4px;">ডিফল্ট মাস্টার পাসওয়ার্ড: <code>lahar2026</code></small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="margin-top:14px;">
+              <i class="fa-solid fa-lock"></i> নিরাপদ লগইন
+            </button>
+            <a href="#home" class="btn btn-outline-dark btn-block" style="margin-top:10px;">
+              <i class="fa-solid fa-arrow-left"></i> ওয়েবসাইটে ফিরে যান
+            </a>
+          </form>
         </div>
-
-        <div style="background: #FDFBF7; border: 1px solid rgba(200, 155, 60, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
-          <h4 style="margin-bottom: 12px; color: var(--color-primary); display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-store"></i> সক্রিয় পাবলিক স্টোরফ্রন্ট ফিচারসমূহ
-          </h4>
-          <ul style="font-size: 0.92rem; color: var(--color-text-main); line-height: 1.8; padding-left: 20px; margin: 0;">
-            <li><strong>অথেনটিক শাড়ি ক্যাটালগ:</strong> ৬টি মাস্টারপিস কালেকশন (গামছা, হাতি ফোক, টাঙ্গাইল সিল্ক, ঢাকাই জামদানি, পপকর্ন বুটিক)।</li>
-            <li><strong>ভিডিও লুকবুক ও রিলস:</strong> ৯:১৬ পোর্ট্রেট মডেল শ্যুট ও ড্রেপ প্রিভিউ।</li>
-            <li><strong>হোয়াটসঅ্যাপ ক্লিক-টু-অর্ডার:</strong> ২৪/৭ সরাসরি সুরক্ষিত হোয়াটসঅ্যাপ অর্ডার মেসেজ জেনারেটর (+৮৮০ ১৫১৮-৯৭৯৮২৬)।</li>
-            <li><strong>ক্যাম্পেইন ল্যান্ডিং পেজ:</strong> ফেসবুক বিজ্ঞাপনের জন্য স্পেশাল অফার পেজ (<code>#landing/boishakh-puja-special</code>)।</li>
-            <li><strong>লাইভ সার্চ, উইশলিস্ট ও ব্যাগ:</strong> তাৎক্ষণিক প্রোডাক্ট সার্চ ও ব্যাগ কাউন্টার।</li>
-          </ul>
-        </div>
-
-        <div style="background: #FFF8E1; border: 1px solid #FFE082; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-          <h4 style="margin-bottom: 10px; color: #E65100; display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-shield-halved"></i> ক্লাউড ডাটাবেজ ও ব্যাকএন্ড সংক্রান্ত তথ্য
-          </h4>
-          <p style="font-size: 0.88rem; color: #5D4037; line-height: 1.6; margin-bottom: 10px;">
-            GitHub Pages একটি স্ট্যাটিক সাইট হোস্টিং প্ল্যাটফর্ম। এতে কোনো সার্ভার-সাইড ডাটাবেজ (Server Database) থাকে না। ক্লায়েন্ট-সাইড ব্রাউজার মেমোরিতে (localStorage) এডমিন পাসওয়ার্ড বা ডাটা রাখা ঝুঁকিপূর্ণ ও অনিরাপদ।
-          </p>
-          <p style="font-size: 0.88rem; color: #5D4037; line-height: 1.6; margin: 0;">
-            ডিভাইস-ব্যাপী রিয়েল-টাইম ক্যাটালগ আপডেট, রিভিউ অনুমোদন এবং কাস্টমার একাউন্টের জন্য ভবিষ্যতে একটি সুরক্ষিত ক্লাউড ডাটাবেজ API (যেমন Supabase / Firebase / Node.js Backend) যুক্ত করা সুপারিশকৃত। পূর্ণাঙ্গ লোকাল এডমিন ম্যানেজমেন্ট প্যানেল আপনার লোকাল ডেভেলপমেন্ট প্রজেক্টে সংরক্ষিত রয়েছে।
-          </p>
-        </div>
-
-        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-          <a href="#home" class="btn btn-primary" style="padding: 10px 24px;">
-            <i class="fa-solid fa-house"></i> মূল স্টোরফ্রন্টে ফিরে যান
-          </a>
-          <a href="#landing/boishakh-puja-special" class="btn btn-outline-dark" style="padding: 10px 24px;">
-            <i class="fa-solid fa-bullhorn"></i> স্পেশাল অফার দেখুন
-          </a>
-        </div>
-      </div>
-    `;
-    window.scrollTo(0, 0);
-    return;
-  }
+      `;
+      return;
+    }
 
     // Authenticated Dashboard
     const totalProducts = this.products.length;
