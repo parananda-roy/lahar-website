@@ -1,0 +1,27 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Editor & IDE Configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Private, Internal Business, and Instruction Files
+website-instructions.md
+PROJECT-STATUS.md
+*instruction*
+*backup*
+*.bak
+*secret*
+*pass*
+*private*
+facebook-page-references/
+
+# Temporary & Log Files
+scratch/
+*.log
+.system_generated/
